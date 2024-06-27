@@ -5,11 +5,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import com.example.hello_world.ui.theme.Hello_worldTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -24,7 +30,6 @@ import org.json.JSONArray
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import coil.compose.rememberAsyncImagePainter
-
 
 data class Contact(val name: String, val phone: String)
 
@@ -123,27 +128,48 @@ suspend fun loadContacts(context: Context): List<Contact> {
 @Composable
 fun Tab2Content() {
     val imageList = remember { (1..20).map { "file:///android_asset/$it.jpeg" } }
+    var selectedImage by remember { mutableStateOf<String?>(null) }
 
-    LazyColumn {
+    if (selectedImage != null) {
+        Dialog(onDismissRequest = { selectedImage = null }) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Image(
+                    painter = rememberAsyncImagePainter(selectedImage),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.8f),
+                    contentScale = ContentScale.Fit
+                )
+            }
+        }
+    }
+
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(4),
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
         items(imageList) { imageUrl ->
-            ImageItem(imageUrl)
+            ImageItem(imageUrl) { selectedImage = imageUrl }
         }
     }
 }
 
 @Composable
-fun ImageItem(imageUrl: String) {
+fun ImageItem(imageUrl: String, onClick: () -> Unit) {
     Image(
         painter = rememberAsyncImagePainter(imageUrl),
         contentDescription = null,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
-            .height(200.dp),
+            .height(150.dp)
+            .clickable { onClick() },
         contentScale = ContentScale.Crop
     )
 }
-
 
 @Composable
 fun Tab3Content() {
