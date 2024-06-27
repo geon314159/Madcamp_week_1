@@ -1,0 +1,22 @@
+[
+    {"name": "John Doe", "phone": "123-456-7890"},
+    {"name": "Jane Smith", "phone": "987-654-3210"},
+    {"name": "Alice Johnson", "phone": "456-789-1234"},
+    {"name": "Bob Brown", "phone": "321-654-9870"},
+    {"name": "Charlie Davis", "phone": "654-987-3210"},
+    {"name": "David Evans", "phone": "789-123-4560"},
+    {"name": "Eva Foster", "phone": "123-789-4560"},
+    {"name": "Frank Green", "phone": "456-123-7890"},
+    {"name": "Grace Harris", "phone": "789-456-1230"},
+    {"name": "Hank Irving", "phone": "321-987-6540"},
+    {"name": "Ivy Johnson", "phone": "654-321-9870"},
+    {"name": "Jack Kelly", "phone": "987-123-4560"},
+    {"name": "Karen Lee", "phone": "123-654-7890"},
+    {"name": "Leo Martin", "phone": "456-987-1230"},
+    {"name": "Mona Nelson", "phone": "789-321-4560"},
+    {"name": "Nina O'Brien", "phone": "321-654-1230"},
+    {"name": "Oscar Parker", "phone": "654-789-3210"},
+    {"name": "Paul Quinn", "phone": "987-456-1230"},
+    {"name": "Quincy Reed", "phone": "123-321-6540"},
+    {"name": "Rita Smith", "phone": "456-123-9870"}
+]
